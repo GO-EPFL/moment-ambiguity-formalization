@@ -1,0 +1,60 @@
+name: Lean verification
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - name: Configure Lean
+        uses: leanprover/lean-action@38fbc41a8c28c4cbaec22d7f7de508ec2e7c0dd9 # v1.5.0
+        with:
+          auto-config: false
+          build: false
+          use-github-cache: false
+          use-mathlib-cache: false
+
+      - name: Check pinned dependencies
+        run: |
+          lake update
+          git diff --exit-code -- lake-manifest.json
+
+      - name: Fetch mathlib cache
+        run: lake exe cache get
+
+      - name: Check source trust boundary
+        shell: bash
+        run: |
+          if rg -n '^[[:space:]]*((private|protected|noncomputable)[[:space:]]+)*(axiom|unsafe|opaque)\b|\b(sorry|admit)\b|\b(TODO|FIXME|PLACEHOLDER)\b' \
+            MomentAmbiguity.lean MomentAmbiguity; then
+            echo "Found a project-defined trust escape, proof hole, or placeholder."
+            exit 1
+          fi
+
+      - name: Build complete development
+        run: lake build MomentAmbiguity
+
+      - name: Run regression checks strictly
+        run: |
+          lake env lean -DwarningAsError=true MomentAmbiguity/Regression.lean
+          lake env lean -DwarningAsError=true MomentAmbiguity/ClosedRegression.lean
+
+      - name: Audit principal results strictly
+        run: lake env lean -DwarningAsError=true MomentAmbiguity/AxiomAudit.lean
