@@ -1,6 +1,6 @@
-import MomentAmbiguity.Basic
-import MomentAmbiguity.Discrete
-import MomentAmbiguity.Vandermonde
+import MomentAmbiguity.Foundation.Basic
+import MomentAmbiguity.Foundation.Discrete
+import MomentAmbiguity.Construction.Vandermonde
 
 /-!
 # The binary moment separator

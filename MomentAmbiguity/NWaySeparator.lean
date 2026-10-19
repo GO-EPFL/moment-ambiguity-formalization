@@ -1,13 +1,13 @@
-import MomentAmbiguity.Basic
-import MomentAmbiguity.Discrete
-import MomentAmbiguity.NWayCoefficients
+import MomentAmbiguity.Foundation.Basic
+import MomentAmbiguity.Foundation.Discrete
+import MomentAmbiguity.Construction.NWayCoefficients
 
 /-!
 # The `N`-way residue-class separator
 
 This module isolates the measure-theoretic normalization step from the analytic coefficient
 construction.  `ResidueWeightCertificate` is not an external assumption: the intended
-certificate is supplied by `NWayCoefficients`; spelling out the interface makes every
+certificate is supplied by `Construction/NWayCoefficients.lean`; spelling out the interface makes every
 summability and positivity obligation visible to Lean.
 -/
 

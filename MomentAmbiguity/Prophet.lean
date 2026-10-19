@@ -1,5 +1,5 @@
-import MomentAmbiguity.ProphetSeparator
-import MomentAmbiguity.CorreaLower
+import MomentAmbiguity.Prophet.Separator
+import MomentAmbiguity.Prophet.LogLowerBound
 import Mathlib.Data.Nat.Choose.Bounds
 
 /-!
@@ -7,8 +7,8 @@ import Mathlib.Data.Nat.Choose.Bounds
 
 This module keeps all guarantees in multiplication form.  The logarithmic rank-one lower bound
 is supplied internally by the measurable exponential-bucketing construction in
-`CorreaLower`; order-statistic monotonicity propagates it to every fixed rank.  Compatibility
-helpers retain the former explicit-external-interface formulation.
+`Prophet/LogLowerBound.lean`; order-statistic monotonicity propagates it to every fixed rank. Parameterized
+helpers also accept the named lower-bound interface for reuse with other proofs of that bound.
 -/
 
 open scoped ENNReal NNReal BigOperators Topology
@@ -88,8 +88,7 @@ theorem rhoMom_first_le_rank {m : ℕ} (hm : 1 ≤ m) (r : ValidRank m) :
     exact le_csSup (prophetFeasibleSet_bddAbove r)
       (prophetFeasibleSet_first_subset hm r halpha)
 
-/-- Compatibility helper for `prop:log-lowerbound`, retaining the former explicit external
-interface as a theorem parameter. -/
+/-- `prop:log-lowerbound` parameterized by the named lower-bound interface. -/
 theorem prophet_log_lower_bound_of_external
     (hCorrea : External.CorreaLogLowerBound) :
     ∃ a : ℝ, 0 < a ∧ ∃ m_lb : ℕ, ∃ hm_lb : 2 ≤ m_lb,
@@ -104,8 +103,7 @@ theorem prophet_log_lower_bound :
         a / Real.log m ≤ rhoMom (External.firstRank m (by omega)) :=
   prophet_log_lower_bound_of_external correaLogLowerBound
 
-/-- Compatibility helper for the manuscript's fixed-rank lower direction, parameterized by
-the former external interface. -/
+/-- The fixed-rank lower direction, parameterized by the rank-one lower-bound interface. -/
 theorem prophet_log_lower_bound_rank_of_external
     (hCorrea : External.CorreaLogLowerBound) (r : ℕ) (hr : 1 ≤ r) :
     ∃ a : ℝ, 0 < a ∧ ∃ m₀ : ℕ, ∃ hrm₀ : r ≤ m₀, ∃ hm₀ : 2 ≤ m₀,

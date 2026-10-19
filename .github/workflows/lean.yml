@@ -39,22 +39,5 @@ jobs:
       - name: Fetch mathlib cache
         run: lake exe cache get
 
-      - name: Check source trust boundary
-        shell: bash
-        run: |
-          if rg -n '^[[:space:]]*((private|protected|noncomputable)[[:space:]]+)*(axiom|unsafe|opaque)\b|\b(sorry|admit)\b|\b(TODO|FIXME|PLACEHOLDER)\b' \
-            MomentAmbiguity.lean MomentAmbiguity; then
-            echo "Found a project-defined trust escape, proof hole, or placeholder."
-            exit 1
-          fi
-
-      - name: Build complete development
-        run: lake build MomentAmbiguity
-
-      - name: Run regression checks strictly
-        run: |
-          lake env lean -DwarningAsError=true MomentAmbiguity/Regression.lean
-          lake env lean -DwarningAsError=true MomentAmbiguity/ClosedRegression.lean
-
-      - name: Audit principal results strictly
-        run: lake env lean -DwarningAsError=true MomentAmbiguity/AxiomAudit.lean
+      - name: Verify complete development
+        run: bash scripts/verify.sh

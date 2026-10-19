@@ -1,0 +1,64 @@
+import MomentAmbiguity.Construction.Vandermonde
+import MomentAmbiguity.BinarySeparator
+import MomentAmbiguity.NWaySeparator
+import MomentAmbiguity.Construction.TotalVariation
+import MomentAmbiguity.Quantile
+import MomentAmbiguity.Newsvendor
+import MomentAmbiguity.Pricing
+import MomentAmbiguity.Secretary
+import MomentAmbiguity.Prophet
+import MomentAmbiguity.ProphetMultiSelection
+
+/-!
+# Axiom audit for the principal manuscript results
+
+The Ramsey, classical secretary, and prophet-bucketing interfaces are named propositions
+whose proofs are included in this project. The principal manuscript results below have no
+external theorem parameters. Each command displays the foundational axioms used by its proof.
+-/
+
+#print axioms MomentAmbiguity.finite_binary_vandermonde
+#print axioms MomentAmbiguity.finite_binary_vandermonde_with_integrability
+#print axioms MomentAmbiguity.BinarySeparator.finiteWeight_existsUnique
+#print axioms MomentAmbiguity.BinarySeparator.key_prop_1_extended
+#print axioms MomentAmbiguity.BinarySeparator.binary_separator
+#print axioms MomentAmbiguity.BinarySeparator.limit_probabilities_atom_sum_and_decay
+#print axioms MomentAmbiguity.dyadic_infinite_product_ge_nine_thirty_two
+#print axioms MomentAmbiguity.dyadic_reciprocal_infinite_product_le_thirty_two_nine
+#print axioms MomentAmbiguity.nwayCoeff_eq_infiniteDigitConfig_tsum
+#print axioms MomentAmbiguity.nway_separator
+#print axioms MomentAmbiguity.key_prop_2_ext
+#print axioms MomentAmbiguity.exists_full_momentClass_pairwise_maximalTV
+#print axioms MomentAmbiguity.exists_full_momentClass_injective_pairwise_maximalTV
+#print axioms MomentAmbiguity.quantile_separation
+#print axioms MomentAmbiguity.chance_capacity
+#print axioms MomentAmbiguity.chance_capacity_measurable
+#print axioms MomentAmbiguity.newsvendor_impossibility
+#print axioms MomentAmbiguity.randomized_pricing_all_moments
+#print axioms MomentAmbiguity.finiteHypergraphRamsey
+#print axioms MomentAmbiguity.finiteRamseyPrinciple
+#print axioms MomentAmbiguity.classicalSecretaryUpperBound
+#print axioms MomentAmbiguity.classicalSecretaryAttainment
+#print axioms MomentAmbiguity.classicalSecretaryFinite
+#print axioms MomentAmbiguity.classicalSecretaryLimit
+#print axioms MomentAmbiguity.ramsey_erasure
+#print axioms MomentAmbiguity.full_secretary_success
+#print axioms MomentAmbiguity.secretary_asymptotic
+#print axioms MomentAmbiguity.finiteRamsey_largeHomogeneousSet
+#print axioms MomentAmbiguity.finiteIIDAverage_le_of_permutation_average_choose
+#print axioms MomentAmbiguity.uniformMixture_mem_momentClass
+#print axioms MomentAmbiguity.independentValues_uniformMixture
+#print axioms MomentAmbiguity.secretarySuccessProbabilityAtProfile_uniformMixture_le_grid
+#print axioms MomentAmbiguity.ramsey_erasure_iid
+#print axioms MomentAmbiguity.secretaryIID_fixedMomentClass_upper
+#print axioms MomentAmbiguity.full_secretary_success_iid
+#print axioms MomentAmbiguity.full_secretary_success_both
+#print axioms MomentAmbiguity.secretary_iid_asymptotic
+#print axioms MomentAmbiguity.order_stat_separator
+#print axioms MomentAmbiguity.correaLogLowerBound
+#print axioms MomentAmbiguity.prophetBucketPolicy
+#print axioms MomentAmbiguity.prophetBucket_expectedReward_lower
+#print axioms MomentAmbiguity.prophet_upper_bound
+#print axioms MomentAmbiguity.prophet_log_lower_bound
+#print axioms MomentAmbiguity.prophet
+#print axioms MomentAmbiguity.prophet_r_selection
